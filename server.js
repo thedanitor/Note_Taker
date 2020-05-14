@@ -10,8 +10,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static("public"));
-app.use("/api", apiRoutes);
-app.use("/", htmlRoutes);
+//Router points server to route files
+// These routes give out server a "map" of how to respond when users visit or request data from various URLS
+require('./routes/apiRoute')(app);
+require('./routes/htmlRoute')(app);
 
 
 
