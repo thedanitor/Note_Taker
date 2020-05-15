@@ -6,7 +6,7 @@ module.exports = function (app) {
     fs.readFile("./db/db.json", "utf8", (err, response) => {
       if (err) throw err;
       let allNotes = JSON.parse(response);
-    //   console.log(allNotes);
+      //   console.log(allNotes);
       res.json(allNotes);
     });
   });
@@ -38,31 +38,19 @@ module.exports = function (app) {
   });
 
   app.delete("/api/notes/:id", function (req, res) {
-    // app.delete("/api/notes/id:", function (req, res) {
     fs.readFile("./db/db.json", "utf8", (err, response) => {
-        if (err) throw err;
-        let noteID = req.params.id;
-        // console.log(req.params);
-        let allNotes = JSON.parse(response);
-        console.log(allNotes);
-        console.log(noteID);
-    
-        let noteDelete = allNotes.filter(note => note.id != noteID);
-        // console.log(noteDelete);
-        
+      if (err) throw err;
+      let noteID = req.params.id;
+      let allNotes = JSON.parse(response);
+      // creates noteDelete array with all objects except the one with noteID
+      let noteDelete = allNotes.filter((note) => note.id != noteID);
 
-        console.log("deleting");
-        fs.writeFile("./db/db.json", JSON.stringify(noteDelete), (err) => {
-            if (err) throw res.status(500).json(err);
-            res.json({ success: true, msg: "Deleted selected note" });
-            console.log("Note deleted!", noteID);
-          });
-    })
+      console.log("deleting");
+      fs.writeFile("./db/db.json", JSON.stringify(noteDelete), (err) => {
+        if (err) throw res.status(500).json(err);
+        res.json({ success: true, msg: "Deleted selected note" });
+        console.log("Note deleted!", noteID);
+      });
+    });
   });
 };
-
-//create var to get id
-//let noteId = req.params.id;
-//read file
-//filter note id (array.filter)
-//write file
