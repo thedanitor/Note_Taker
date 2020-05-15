@@ -2,7 +2,7 @@
 
 I created a web application for taking notes. It allows the user to Create, Read, Update, and Delete notes 
 
-GIF HERE!!
+![Note Taker gif](/public/assets/demo-images/noteTakerShort.gif)
 
 ## Technologies Used
 
